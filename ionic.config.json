@@ -1,0 +1,8 @@
+{
+  "name": "FDS",
+  "app_id": "c407d365",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
