@@ -85,10 +85,13 @@
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyDze0wSMm-KvT2UQ6OJ9MXgeNSMpO2itvs" />
         <variable name="PLAY_SERVICES_VERSION" value="15.0.1" />
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="26.1.0" />
+        <variable name="API_KEY_FOR_IOS" value="(API_KEY_FOR_IOS)" />
     </plugin>
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
+    <plugin name="urbanairship-cordova" spec="^7.0.1" />
     <allow-navigation href="http://192.168.8.101:8100" />
     <allow-navigation href="http://192.168.232.1:8100" />
-    <engine name="android" spec="^7.1.0" />
     <engine name="browser" spec="5.0.3" />
+    <engine name="android" spec="~7.0.0" />
 </widget>

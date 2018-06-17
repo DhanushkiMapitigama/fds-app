@@ -4,7 +4,6 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
-import { MapPage } from '../pages/map/map';
 import { SearchPage } from '../pages/search/search';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -16,8 +15,10 @@ import { Http } from '@angular/http';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation';
+import { TranslateModule, TranslateLoader,TranslateService } from 'ng2-translate';
 
 import { NetworkEngineProvider } from '../providers/network-engine/network-engine';
+import { FcmProvider } from '../providers/fcm/fcm';
 
 
 @NgModule({
@@ -25,13 +26,13 @@ import { NetworkEngineProvider } from '../providers/network-engine/network-engin
     MyApp,
     AboutPage,
     SearchPage,
-    MapPage,
     TabsPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     HttpClientModule,
+    TranslateModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -39,7 +40,6 @@ import { NetworkEngineProvider } from '../providers/network-engine/network-engin
     MyApp,
     AboutPage,
     SearchPage,
-    MapPage,
     TabsPage
   ],
   providers: [
@@ -47,8 +47,10 @@ import { NetworkEngineProvider } from '../providers/network-engine/network-engin
     StatusBar,
     SplashScreen,
     Geolocation,
+    TranslateService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    NetworkEngineProvider
+    NetworkEngineProvider,
+    FcmProvider
   ]
 })
 export class AppModule {}

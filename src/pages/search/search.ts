@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { NetworkEngineProvider } from '../../providers/network-engine/network-engine';
-
+import { AlertController } from 'ionic-angular';
 /*
  * Generated class for the SearchPage page.
  * See https://ionicframework.com/docs/components/#navigation for more info on
@@ -31,8 +31,9 @@ export class SearchPage {
   watchID: any;
   current_level: any[];
   velocity: any[];
+  t: string;
 
-  constructor(public navCtrl: NavController,public network: NetworkEngineProvider , public navParams: NavParams, private _googleMaps: GoogleMaps, public geo: Geolocation, public http:Http) {
+  constructor(public navCtrl: NavController,public network: NetworkEngineProvider ,private alertCtrl: AlertController, public navParams: NavParams, private _googleMaps: GoogleMaps, public geo: Geolocation, public http:Http) {
     this.latitude = 7.1;
     this.longitude = 79.8;
   }
@@ -151,12 +152,28 @@ export class SearchPage {
     p.then(data => {
       console.log("Recieved: "+JSON.stringify(data));
       this.parseJson(data);
+      if(data.current_level < 1 && data.velocity < 0.6){
+          this.t = "Safe!";
+      } else if(data.current_level < 1.5 && data.velocity < 0.45){
+          this.t = "Not safe for children!";
+      } else if(data.velocity >0.7){
+        this.t = "Not safe. High velocity!";
+      } else {
+        this.t = "Not safe. Too deep!";
+      }
+      
+      let alert = this.alertCtrl.create({        
+        title: this.t,
+        subTitle: 'current water level: ' + data.current_level + '\n'+
+        'velocity: ' +data.velocity,
+        buttons: ['OK']
+      });
+      alert.present(); 
       //this.netResponse = JSON.stringify(data.json.args()); 
-    })
+    });
     
-  //   this.http.get("http://flood.codechilli.lk/api/nodes/"+ river +"/"+this.latitude+"/"+this.longitude).map(res => res.json()).subscribe(data => {
-  //     this.posts = data.data.children;
-  // });
+       
+    
   }
 
   parseJson(data){
